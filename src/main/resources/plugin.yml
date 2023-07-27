@@ -1,0 +1,6 @@
+name: ColorfulGUI
+version: '${project.version}'
+main: me.xflyiwnl.colorfulgui.ColorfulGUI
+api-version: '1.16'
+commands:
+  test:
