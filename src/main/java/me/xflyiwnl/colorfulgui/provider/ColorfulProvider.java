@@ -59,7 +59,7 @@ public class ColorfulProvider<T extends Gui> implements InventoryHolder {
     public void onDrag(InventoryDragEvent event) {
     }
 
-    public void show(Player player) {
+    public void show() {
         getGui().show(player);
     }
 

@@ -8,6 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +17,7 @@ public class ColorfulGUI {
     private static JavaPlugin instance;
 
     public ColorfulGUI(JavaPlugin plugin) {
-        this.instance = plugin;
+        instance = plugin;
 
         registerListeners();
 
