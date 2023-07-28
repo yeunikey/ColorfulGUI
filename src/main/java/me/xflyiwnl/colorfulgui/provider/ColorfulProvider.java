@@ -64,7 +64,7 @@ public class ColorfulProvider<T extends Gui> implements InventoryHolder {
     }
 
     @Override
-    public @NotNull Inventory getInventory() {
+    public Inventory getInventory() {
         return gui.getInventory();
     }
 
