@@ -244,3 +244,7 @@ public class TestProvider extends ColorfulProvider<Gui> {
 
 }
 ```
+В итоге у вас получится такое меню:
+![image](https://github.com/xflyiwnl/ColorfulGUI/assets/108489760/33fff71c-adc9-4e9a-b801-c517ca880d3f)
+
+В
