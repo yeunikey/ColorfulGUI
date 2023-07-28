@@ -12,8 +12,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public class ColorfulProvider<T extends Gui> implements InventoryHolder {
 
     private Player player;
@@ -64,7 +62,7 @@ public class ColorfulProvider<T extends Gui> implements InventoryHolder {
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NotNull Inventory getInventory() {
         return gui.getInventory();
     }
 

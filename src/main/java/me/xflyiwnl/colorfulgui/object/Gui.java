@@ -4,9 +4,7 @@ import me.xflyiwnl.colorfulgui.provider.ColorfulProvider;
 import me.xflyiwnl.colorfulgui.util.TextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 
 import java.util.ArrayList;
 import java.util.List;

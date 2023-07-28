@@ -1,9 +1,7 @@
 package me.xflyiwnl.colorfulgui.builder.inventory;
 
 import me.xflyiwnl.colorfulgui.object.Gui;
-import me.xflyiwnl.colorfulgui.object.GuiMask;
 import me.xflyiwnl.colorfulgui.provider.ColorfulProvider;
-import org.bukkit.inventory.InventoryHolder;
 
 import java.util.List;
 

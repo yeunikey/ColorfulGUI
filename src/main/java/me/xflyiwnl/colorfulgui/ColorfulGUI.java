@@ -4,13 +4,7 @@ import me.xflyiwnl.colorfulgui.builder.ItemBuilder;
 import me.xflyiwnl.colorfulgui.builder.inventory.DynamicGuiBuilder;
 import me.xflyiwnl.colorfulgui.builder.inventory.StaticGuiBuilder;
 import me.xflyiwnl.colorfulgui.listener.GuiListener;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 
 public class ColorfulGUI {
 
