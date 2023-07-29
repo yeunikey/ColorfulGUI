@@ -53,7 +53,9 @@ public class GuiListener implements Listener {
             if (item == null) {
                 return;
             }
-            item.getAction().execute(event);
+            if (item.getAction() != null) {
+                item.getAction().execute(event);
+            }
         }
 
 

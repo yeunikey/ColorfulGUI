@@ -6,11 +6,14 @@ import me.xflyiwnl.colorfulgui.object.GuiItem;
 import me.xflyiwnl.colorfulgui.util.TextUtil;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.*;
@@ -27,6 +30,9 @@ public class ItemBuilder {
 
     private boolean unbreakable = false;
     private int model = 0;
+
+    private boolean isSkull = false;
+    private Player player;
 
     private Map<Enchantment, Integer> enchantments = new HashMap<Enchantment, Integer>();
     private GuiAction<InventoryClickEvent> action;
@@ -77,6 +83,12 @@ public class ItemBuilder {
         return this;
     }
 
+    public ItemBuilder skull(Player player) {
+        this.player = player;
+        this.isSkull = true;
+        return this;
+    }
+
     public GuiItem build() {
 
         UUID uuid = UUID.randomUUID();
@@ -104,6 +116,13 @@ public class ItemBuilder {
         }
 
         itemMeta.getPersistentDataContainer().set(new NamespacedKey(ColorfulGUI.getInstance(), "colorfulgui"), PersistentDataType.STRING, uuid.toString());
+
+        if (isSkull) {
+            itemStack.setType(Material.PLAYER_HEAD);
+            SkullMeta skullMeta = (SkullMeta) itemMeta;
+            skullMeta.setPlayerProfile(player.getPlayerProfile());
+            itemStack.setItemMeta(skullMeta);
+        }
 
         itemStack.setItemMeta(itemMeta);
         return new GuiItem(uuid, itemStack, action);
