@@ -7,7 +7,7 @@
 <h3>Установка</h3>
 
 Для работы с Maven:
-```
+```xml
 <repository>
     <id>jitpack.io</id>
     <url>https://jitpack.io</url>
@@ -23,7 +23,7 @@
 <h3>Начало работы</h3>
 
 Перед началом работы с API, вам необходимо зарегестрировать `ColorfulGUI`:
-```
+```java
 ColorfulGUI colorfulGUI = new ColorfulGUI(plugin);
 ```
 В поле `plugin` вставляем ваш главный класс и храним зарегестрированный `ColorfulGUI` в вашем главном классе или где-нибудь ещё, чтобы когда нужно мы обращались к нему.
@@ -33,7 +33,7 @@ ColorfulGUI colorfulGUI = new ColorfulGUI(plugin);
 <h4>Создание предметов</h4>
 
 Для создания предметов отвечает класс `ItemBuilder`. Создание простого функционального предмета происходит так:
-```
+```java
 GuiItem simpleItem = colorfulGui.item()
                 .material(Material.GRASS_BLOCK)
                 .name("Просто предмет")
@@ -55,17 +55,17 @@ GuiItem simpleItem = colorfulGui.item()
 <h4>Создание провайдера</h4>
 
 Создаём класс и называем его как хотим, после наследуем `ColorfulProvider<?>`. В поле `?` указываем тип инвентаря, к примеру `PaginatedGui` или `Gui`. Отличаются они тем, что один может иметь несколько страниц, а другой ограничен лишь одной страницей. Перейдём к созданию:
-```
+```java
 public class TestProvider extends ColorfulProvider<Gui>
 ```
 После, создаём конструктор:
-```
+```java
 public TestProvider(Player player) {
         super(player);
     }
 ```
 или
-```
+```java
 public TestProvider(Player player, int updateTime) {
         super(player, updateTime);
     }
@@ -73,7 +73,7 @@ public TestProvider(Player player, int updateTime) {
 В первом варианте конструктора инвентарь не будет обновляться и метод `update()` не будет вызываться. Во втором конструкторе вместо `int updateTime` записываем любую цифру выше `0`. Если цифра будет ниже или равна `0`, то инвентарь обновляться не будет. Цифра указывается в секундах. Если укажем `1`, то инвентарь будет обновляться каждые `1` секунд.
 
 Пришло время создать метод, который будет вызываться как только наш инвентарь будет создан:
-```
+```java
  @Override
     public void init() {
       // todo, заполнение инвентаря предметами и показ инвентаря игроку
@@ -83,7 +83,7 @@ public TestProvider(Player player, int updateTime) {
 В методе `init()` рекомендуется заполнять ваш инвентарь предметами и вызывать открыватель инвентаря для игрока `show()`
 
 Теперь, чтобы инвентарь можно было открыть, сделаем статичный метод `static void showGUI(Player)`:
-```
+```java
 public static void showGUI(Player player) {
         colorfulGui.gui()
                 .holder(new TestProvider(player))
@@ -97,7 +97,7 @@ public static void showGUI(Player player) {
 <h4>Работа с маской</h4>
 
 В нашем API есть удобная система маски. Пример создания маски:
-```
+```java
 public static void showGUI(Player player) {
         colorfulGui.gui()
                 .holder(new TestProvider(player))
@@ -115,42 +115,42 @@ public static void showGUI(Player player) {
     }
 ```
 И присвоение предмету его индикатор:
-```
+```java
 getGui().getMask().addItem("S", simpleItem);
 ```
 
 <h4>Слушатели</h4>
 
 Когда инвентарь обновился:
-```
+```java
 @Override
 public void update() {
     getPlayer().sendMessage("update event");
 }
 ```
 Когда кликнули по инвентарю:
-```
+```java
 @Override
 public void onClick(InventoryClickEvent event) {
     getPlayer().sendMessage("click event");
 }
 ```
 Когда открыли инвентарь:
-```
+```java
 @Override
 public void onOpen(InventoryOpenEvent event) {
     getPlayer().sendMessage("open event");
 }
 ```
 Когда закрыли инвентарь:
-```
+```java
 @Override
 public void onClose(InventoryCloseEvent event) {
     getPlayer().sendMessage("close event");
 }
 ```
 Когда перетаскивали предмет:
-```
+```java
 @Override
 public void onDrag(InventoryDragEvent event) {
     getPlayer().sendMessage("drag event");
@@ -160,7 +160,7 @@ public void onDrag(InventoryDragEvent event) {
 <h4>Итог</h4>
 
 В итоге у нас получится такой класс:
-```
+```java
 public class TestProvider extends ColorfulProvider<Gui> {
     
     public TestProvider(Player player) {

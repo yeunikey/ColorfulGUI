@@ -5,7 +5,7 @@
 <h3>Installation</h3>
 
 To work with Maven:
-```
+```xml
 <repository>
     <id>jitpack.io</id>
     <url>https://jitpack.io</url>
@@ -21,7 +21,7 @@ To work with Maven:
 <h3>Starting work</h3>
 
 Before you can start working with the API, you need to register `ColorfulGUI`:
-```
+```java
 ColorfulGUI colorfulGUI = new ColorfulGUI(plugin);
 ```
 Put your main class in the `plugin` field and store the registered `ColorfulGUI` in your main class or somewhere else so that we can refer to it when needed.
@@ -31,7 +31,7 @@ Put your main class in the `plugin` field and store the registered `ColorfulGUI`
 <h4>Creating Items</h4>
 
 The `ItemBuilder` class is responsible for creating items. Creating a simple functional item goes like this:
-```
+```java
 GuiItem simpleItem = colorfulGui.item()
                 .material(Material.GRASS_BLOCK)
                 .name("SimpleItem")
@@ -53,17 +53,17 @@ The `.action()` attribute is responsible for clicking the item when `InventoryCl
 <h4>Creating the provider</h4>
 
 Create a class and name it whatever we want, then inherit `ColorfulProvider<?>`. In the `?` field specify the type of inventory, for example `PaginatedGui` or `Gui`. They differ in that one can have multiple pages and the other is limited to only one page. Let's move on to creation:
-```
+```java
 public class TestProvider extends ColorfulProvider<Gui>
 ```
 After that, let's create a constructor:
-```
+```java
 public TestProvider(Player player) {
         super(player);
     }
 ```
 or
-```
+```java
 public TestProvider(Player player, int updateTime) {
         super(player, updateTime);
     }
@@ -71,7 +71,7 @@ public TestProvider(Player player, int updateTime) {
 In the first version of the constructor, the inventory will not be updated and the `update()` method will not be called. In the second constructor, instead of `int updateTime` we write any digit above `0`. If the digit is lower or equal to `0`, the inventory will not be updated. The digit is specified in seconds. If we specify `1`, the inventory will be updated every `1` seconds.
 
 It's time to create a method that will be called as soon as our inventory is created:
-```
+```java
  @Override
     public void init() {
       // todo, fill the inventory with items and show the inventory to the player
@@ -81,7 +81,7 @@ It's time to create a method that will be called as soon as our inventory is cre
 In the `init()` method, it is recommended that you fill your inventory with items and call the player inventory opener `show()`
 
 Now, in order for the inventory to be opened, let's make a static method `static void showGUI(Player)`:
-```
+```java
 public static void showGUI(Player player player) {
         colorfulGui.gui()
                 .holder(new TestProvider(player))
@@ -95,7 +95,7 @@ public static void showGUI(Player player player) {
 <h4>Working with a mask</h4>
 
 We have a handy mask system in our API. Here is an example of creating a mask:
-```
+```java
 public static void showGUI(Player player player) {
         colorfulGui.gui()
                 .holder(new TestProvider(player))
@@ -113,41 +113,41 @@ public static void showGUI(Player player player) {
     }
 ```
 And assigning the item its indicator:
-```
+```java
 getGui().getMask().addItem("S", simpleItem);
 ```
 <h4>Listeners</h4>
 
 When the inventory updated:
-```
+```java
 @Override
 public void update() {
     getPlayer().sendMessage("update event");
 }
 ```
 When the inventory is clicked:
-```
+```java
 @Override
 public void onClick(InventoryClickEvent event) {
     getPlayer().sendMessage("click event");
 }
 ```
 When the inventory is opened:
-```
+```java
 @Override
 public void onOpen(InventoryOpenEvent event) {
     getPlayer().sendMessage("open event");
 }
 ```
 When the inventory is closed:
-```
+```java
 @Override
 public void onClose(InventoryCloseEvent event) {
     getPlayer().sendMessage("close event");
 }
 ```
 When the item was dragged:
-```
+```java
 @Override
 public void onDrag(InventoryDragEvent event) {
     getPlayer().sendMessage("drag event");
@@ -156,7 +156,7 @@ public void onDrag(InventoryDragEvent event) {
 <h4>Summary</h4>
 
 We end up with a class like this:
-```
+```java
 public class TestProvider extends ColorfulProvider<Gui> {
     
     public TestProvider(Player player) {
