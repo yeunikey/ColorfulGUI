@@ -6,7 +6,6 @@ import me.xflyiwnl.colorfulgui.object.GuiItem;
 import me.xflyiwnl.colorfulgui.util.TextUtil;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -102,7 +101,7 @@ public class ItemBuilder {
 
         itemMeta.setLore(TextUtil.colorize(lore));
 
-        if (enchantments.isEmpty()) {
+        if (!enchantments.isEmpty()) {
             enchantments.forEach((enchantment, integer) -> {
                 itemMeta.addEnchant(enchantment, integer, true);
             });
@@ -120,7 +119,7 @@ public class ItemBuilder {
         if (isSkull) {
             itemStack.setType(Material.PLAYER_HEAD);
             SkullMeta skullMeta = (SkullMeta) itemMeta;
-            skullMeta.setPlayerProfile(player.getPlayerProfile());
+            skullMeta.setOwningPlayer(player);
             itemStack.setItemMeta(skullMeta);
         }
 
