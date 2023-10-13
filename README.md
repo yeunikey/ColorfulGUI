@@ -2,6 +2,8 @@
 <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
 <h3 align="center">Удобный API для создания и управления инвентарями</h3>
 
+<h5>Примечание: требует Paper</h5>
+
 [For English 🇬🇧 translation click here](https://github.com/xflyiwnl/ColorfulGUI/blob/master/ENG.md)
 
 <h3>Установка</h3>

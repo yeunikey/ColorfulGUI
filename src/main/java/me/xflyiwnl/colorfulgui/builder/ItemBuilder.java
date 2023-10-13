@@ -119,7 +119,7 @@ public class ItemBuilder {
         if (isSkull) {
             itemStack.setType(Material.PLAYER_HEAD);
             SkullMeta skullMeta = (SkullMeta) itemMeta;
-            skullMeta.setOwningPlayer(player);
+            skullMeta.setPlayerProfile(player.getPlayerProfile());
             itemStack.setItemMeta(skullMeta);
         }
 

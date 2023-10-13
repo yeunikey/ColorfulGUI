@@ -2,6 +2,8 @@
 <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
 <h3 align="center">Comfortable API for creating and managing inventory</h3>
 
+<h5>Note: requires Paper</h5>
+
 <h3>Installation</h3>
 
 To work with Maven:
