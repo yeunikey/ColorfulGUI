@@ -1,14 +1,12 @@
-<h1 align="center">Это - <a target="_blank">ColorfulGUI</a> 
+<h1 align="center">This is <a target="_blank">ColorfulGUI</a> 
 <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
-<h3 align="center">Удобный API для создания и управления инвентарями</h3>
+<h3 align="center">Comfortable API for creating and managing inventory</h3>
 
-<h5>Примечание: требует Paper</h5>
+<h5>Note: requires Paper</h5>
 
-[For English 🇬🇧 translation click here](https://github.com/xflyiwnl/ColorfulGUI/blob/master/ENG.md)
+<h3>Installation</h3>
 
-<h3>Установка</h3>
-
-Для работы с Maven:
+To work with Maven:
 ```xml
 <repository>
     <id>jitpack.io</id>
@@ -22,23 +20,23 @@
 </dependency>
 ```
 
-<h3>Начало работы</h3>
+<h3>Starting work</h3>
 
-Перед началом работы с API, вам необходимо зарегестрировать `ColorfulGUI`:
+Before you can start working with the API, you need to register `ColorfulGUI`:
 ```java
 ColorfulGUI colorfulGUI = new ColorfulGUI(plugin);
 ```
-В поле `plugin` вставляем ваш главный класс и храним зарегестрированный `ColorfulGUI` в вашем главном классе или где-нибудь ещё, чтобы когда нужно мы обращались к нему.
+Put your main class in the `plugin` field and store the registered `ColorfulGUI` in your main class or somewhere else so that we can refer to it when needed.
 
-<h3>Примеры</h3>
+<h3>Examples</h3>
 
-<h4>Создание предметов</h4>
+<h4>Creating Items</h4>
 
-Для создания предметов отвечает класс `ItemBuilder`. Создание простого функционального предмета происходит так:
+The `ItemBuilder` class is responsible for creating items. Creating a simple functional item goes like this:
 ```java
 GuiItem simpleItem = colorfulGui.item()
                 .material(Material.GRASS_BLOCK)
-                .name("Просто предмет")
+                .name("SimpleItem")
                 .lore(Arrays.asList(
                         "1",
                         "2",
@@ -46,64 +44,64 @@ GuiItem simpleItem = colorfulGui.item()
                 ))
                 .amount(1)
                 .action(event -> {
-                    getPlayer().sendMessage("ты кликнул по простому предмету");
+                    getPlayer().sendMessage("you clicked a simple item.")
                 })
                 .build();
 ```
-Также, вы сможете добавить предмету и другие аттрибуты `.model(int)`, `.flags(ItemFlag...)`, `.enchant(Enchantment, int)`, `.unbreakable(boolean)`.
+You can also add other attributes `.model(int)`, `.flags(ItemFlag...)`, `.enchant(Enchantment, int)`, `.unbreakable(boolean)` to the item.
 
-Аттрибут `.action()` отвечает за клик предмета при вызове `InventoryClickEvent`, в котором заранее проверяется на уникальность предмета по ключам.
+The `.action()` attribute is responsible for clicking the item when `InventoryClickEvent` is called, which checks for item uniqueness by key in advance.
 
-<h4>Создание провайдера</h4>
+<h4>Creating the provider</h4>
 
-Создаём класс и называем его как хотим, после наследуем `ColorfulProvider<?>`. В поле `?` указываем тип инвентаря, к примеру `PaginatedGui` или `Gui`. Отличаются они тем, что один может иметь несколько страниц, а другой ограничен лишь одной страницей. Перейдём к созданию:
+Create a class and name it whatever we want, then inherit `ColorfulProvider<?>`. In the `?` field specify the type of inventory, for example `PaginatedGui` or `Gui`. They differ in that one can have multiple pages and the other is limited to only one page. Let's move on to creation:
 ```java
 public class TestProvider extends ColorfulProvider<Gui>
 ```
-После, создаём конструктор:
+After that, let's create a constructor:
 ```java
 public TestProvider(Player player) {
         super(player);
     }
 ```
-или
+or
 ```java
 public TestProvider(Player player, int updateTime) {
         super(player, updateTime);
     }
 ```
-В первом варианте конструктора инвентарь не будет обновляться и метод `update()` не будет вызываться. Во втором конструкторе вместо `int updateTime` записываем любую цифру выше `0`. Если цифра будет ниже или равна `0`, то инвентарь обновляться не будет. Цифра указывается в секундах. Если укажем `1`, то инвентарь будет обновляться каждые `1` секунд.
+In the first version of the constructor, the inventory will not be updated and the `update()` method will not be called. In the second constructor, instead of `int updateTime` we write any digit above `0`. If the digit is lower or equal to `0`, the inventory will not be updated. The digit is specified in seconds. If we specify `1`, the inventory will be updated every `1` seconds.
 
-Пришло время создать метод, который будет вызываться как только наш инвентарь будет создан:
+It's time to create a method that will be called as soon as our inventory is created:
 ```java
  @Override
     public void init() {
-      // todo, заполнение инвентаря предметами и показ инвентаря игроку
+      // todo, fill the inventory with items and show the inventory to the player
       show();
     }
 ```
-В методе `init()` рекомендуется заполнять ваш инвентарь предметами и вызывать открыватель инвентаря для игрока `show()`
+In the `init()` method, it is recommended that you fill your inventory with items and call the player inventory opener `show()`
 
-Теперь, чтобы инвентарь можно было открыть, сделаем статичный метод `static void showGUI(Player)`:
+Now, in order for the inventory to be opened, let's make a static method `static void showGUI(Player)`:
 ```java
-public static void showGUI(Player player) {
+public static void showGUI(Player player player) {
         colorfulGui.gui()
                 .holder(new TestProvider(player))
-                .title("Меню")
+                .title("Menu")
                 .rows(5)
                 .build();
     }
 ```
-`.rows(int)` отвечает за размер инвентаря по высоте. `.title(String)` название инвентаря. `.holder(ColorfulProvider<?>)` провайдер нашего инвентаря, которого только что создали `TestProvider<Gui>`.
+`.rows(int)` is responsible for the height size of the inventory. `.title(String)` the name of the inventory. `.holder(ColorfulProvider<?>)` the provider of our inventory that the `TestProvider<Gui>` just created.
 
-<h4>Работа с маской</h4>
+<h4>Working with a mask</h4>
 
-В нашем API есть удобная система маски. Пример создания маски:
+We have a handy mask system in our API. Here is an example of creating a mask:
 ```java
-public static void showGUI(Player player) {
+public static void showGUI(Player player player) {
         colorfulGui.gui()
                 .holder(new TestProvider(player))
-                .title("Меню")
+                .title("Menu")
                 .rows(5)
                 .mask(Arrays.asList(
                                 "BBBBBBBBB",
@@ -116,52 +114,50 @@ public static void showGUI(Player player) {
                 .build();
     }
 ```
-И присвоение предмету его индикатор:
+And assigning the item its indicator:
 ```java
 getGui().getMask().addItem("S", simpleItem);
 ```
+<h4>Listeners</h4>
 
-<h4>Слушатели</h4>
-
-Когда инвентарь обновился:
+When the inventory updated:
 ```java
 @Override
 public void update() {
     getPlayer().sendMessage("update event");
 }
 ```
-Когда кликнули по инвентарю:
+When the inventory is clicked:
 ```java
 @Override
 public void onClick(InventoryClickEvent event) {
     getPlayer().sendMessage("click event");
 }
 ```
-Когда открыли инвентарь:
+When the inventory is opened:
 ```java
 @Override
 public void onOpen(InventoryOpenEvent event) {
     getPlayer().sendMessage("open event");
 }
 ```
-Когда закрыли инвентарь:
+When the inventory is closed:
 ```java
 @Override
 public void onClose(InventoryCloseEvent event) {
     getPlayer().sendMessage("close event");
 }
 ```
-Когда перетаскивали предмет:
+When the item was dragged:
 ```java
 @Override
 public void onDrag(InventoryDragEvent event) {
     getPlayer().sendMessage("drag event");
 }
 ```
+<h4>Summary</h4>
 
-<h4>Итог</h4>
-
-В итоге у нас получится такой класс:
+We end up with a class like this:
 ```java
 public class TestProvider extends ColorfulProvider<Gui> {
     
@@ -249,6 +245,6 @@ public class TestProvider extends ColorfulProvider<Gui> {
 }
 ```
 
-И такое меню:
+And we get a menu like this:
 
 ![image](https://github.com/xflyiwnl/ColorfulGUI/assets/108489760/33fff71c-adc9-4e9a-b801-c517ca880d3f)
