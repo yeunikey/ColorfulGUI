@@ -20,7 +20,7 @@ public class TextUtil {
 
     public static String colorize(String msg) {
         if (msg.charAt(0) != '#' || msg.charAt(msg.length() - 7) != '#'){
-            return "§f" + ChatColor.translateAlternateColorCodes('&', msg.replaceAll("#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])", "&x&$1&$2&$3&$4&$5&$6"));
+            return ChatColor.translateAlternateColorCodes('&', msg.replaceAll("#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])", "&f&x&$1&$2&$3&$4&$5&$6"));
         }
 
         Color firstCode = hexToColor(msg.substring(1,7).toUpperCase());
@@ -28,7 +28,7 @@ public class TextUtil {
 
         String uncolored = msg.replaceAll("#([a-fA-F0-9]){6}", "");
 
-        return "§f" + gradient(firstCode, secondCode, uncolored);
+        return "§f" + ChatColor.translateAlternateColorCodes('&', gradient(firstCode, secondCode, uncolored));
     }
 
     private static Color hexToColor(String s){
