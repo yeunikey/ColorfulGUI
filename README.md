@@ -54,6 +54,10 @@ You can also add other attributes `.model(int)`, `.flags(ItemFlag...)`, `.enchan
 
 The `.action()` attribute is responsible for clicking the item when `InventoryClickEvent` is called, which checks for item uniqueness by key in advance.
 
+<h5>Note</h5>
+All Strings such as names and lore accept color codes, either pre-1.16 ones `&a, &b, &c...`or hex color codes in format `#abc123` (capital letters also work). 
+Alternatively, if you put two hex color codes in the front and end of a string like this `#123456Example#abcdef`, a color gradient will be created.
+
 <h4>Creating the provider</h4>
 
 Create a class and name it whatever we want, then inherit `ColorfulProvider<?>`. In the `?` field specify the type of inventory, for example `PaginatedGui` or `Gui`. They differ in that one can have multiple pages and the other is limited to only one page. Let's move on to creation:
