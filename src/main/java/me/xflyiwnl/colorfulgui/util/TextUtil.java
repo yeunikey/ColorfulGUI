@@ -19,15 +19,18 @@ public class TextUtil {
     }
 
     public static String colorize(String msg) {
-        if (msg.charAt(0) != '#' || msg.charAt(msg.length() - 7) != '#'){
+        if (msg == null)
+            return "";
+
+        if (msg.length() < 8)
+            return ChatColor.translateAlternateColorCodes('&', msg);
+
+        if (msg.charAt(0) != '#' || msg.charAt(msg.length() - 7) != '#')
             return ChatColor.translateAlternateColorCodes('&', msg.replaceAll("#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])", "&f&x&$1&$2&$3&$4&$5&$6"));
-        }
 
         Color firstCode = hexToColor(msg.substring(1,7).toUpperCase());
         Color secondCode = hexToColor(msg.substring(msg.length() - 6).toUpperCase());
-
         String uncolored = msg.replaceAll("#([a-fA-F0-9]){6}", "");
-
         return "§f" + ChatColor.translateAlternateColorCodes('&', gradient(firstCode, secondCode, uncolored));
     }
 
