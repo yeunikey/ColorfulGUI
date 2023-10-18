@@ -18,7 +18,7 @@
 <dependency>
     <groupId>com.github.xflyiwnl</groupId>
     <artifactId>ColorfulGUI</artifactId>
-    <version>v1.2</version>
+    <version>v1.3</version>
 </dependency>
 ```
 
