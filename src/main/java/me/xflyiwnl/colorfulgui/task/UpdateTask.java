@@ -44,8 +44,10 @@ public class UpdateTask extends BukkitRunnable {
 
     public void updateItem(GuiItem item) {
         if (item instanceof DynamicItem) {
+            DynamicItem dynamicItem = (DynamicItem) item;
+            if (dynamicItem.getOnUpdate() == null) return;
             UpdateItemEvent event = new UpdateItemEvent(item.getItemStack());
-            ((DynamicItem) item).getOnUpdate().execute(event);
+            dynamicItem.getOnUpdate().execute(event);
             item.setItemStack(event.getItem());
         }
     }
