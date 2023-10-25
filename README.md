@@ -42,3 +42,6 @@ ColorfulGUI colorfulGUI = new ColorfulGUI(yourMainClass);
 ```
 
 then follow the documentation [here](https://github.com/xflyiwnl/ColorfulGUI/wiki)
+
+## Communication
+If you need help, you can ask a question in our discord server - https://discord.gg/jpwRyUqg3G
