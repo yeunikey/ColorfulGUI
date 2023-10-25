@@ -4,7 +4,10 @@ import me.xflyiwnl.colorfulgui.provider.ColorfulProvider;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class PaginatedGui extends Gui {
 
@@ -13,9 +16,6 @@ public class PaginatedGui extends Gui {
     protected List<Integer> allowedZone = new ArrayList<>();
 
     private HashMap<Integer, LinkedHashMap<Integer, GuiItem>> pages = new HashMap<>();
-
-    protected LinkedList<GuiItem> dynamicItems = new LinkedList<>();
-    protected Map<Integer, GuiItem> staticItems = new HashMap<>();
 
     public PaginatedGui(ColorfulProvider<?> holder, String title, int rows, GuiMask mask) {
         super(holder, title, rows, mask);
@@ -66,7 +66,7 @@ public class PaginatedGui extends Gui {
         int page = currentPage;
         List<Integer> takenZone = new ArrayList<>();
 
-        for (GuiItem item : dynamicItems) {
+        for (GuiItem item : getAddItems()) {
             for (Integer integer : allowedZone) {
                 if (takenZone.size() == allowedZone.size()) {
                     takenZone.clear();
@@ -91,7 +91,7 @@ public class PaginatedGui extends Gui {
     }
 
     protected void staticItems() {
-        staticItems.forEach((integer, item) -> {
+        getSlotItems().forEach((integer, item) -> {
             getInventory().setItem(integer, item.getItemStack());
         });
     }
@@ -116,8 +116,7 @@ public class PaginatedGui extends Gui {
 
     @Override
     public void addItem(GuiItem item) {
-        getItems().add(item);
-        dynamicItems.add(item);
+        getAddItems().add(item);
     }
 
     @Override
@@ -127,8 +126,7 @@ public class PaginatedGui extends Gui {
 
     @Override
     public void setItem(int slot, GuiItem item) {
-        getItems().add(item);
-        staticItems.put(slot, item);
+        getSlotItems().put(slot, item);
     }
 
     @Override

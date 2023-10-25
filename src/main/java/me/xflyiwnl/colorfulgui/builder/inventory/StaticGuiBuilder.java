@@ -46,6 +46,7 @@ public class StaticGuiBuilder implements GuiBuilder<Gui, StaticGuiBuilder> {
         getMask().setGui(gui);
         getHolder().setGui(gui);
         getHolder().init();
+        getHolder().show();
         return gui;
     }
 

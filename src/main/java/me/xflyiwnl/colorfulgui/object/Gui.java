@@ -6,9 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Gui {
 
@@ -16,7 +14,8 @@ public class Gui {
     private int rows;
 
     private GuiMask mask;
-    private List<GuiItem> items = new ArrayList<GuiItem>();
+    private Map<Integer, GuiItem> slotItems = new HashMap<Integer, GuiItem>();
+    private LinkedList<GuiItem> addItems = new LinkedList<GuiItem>();
 
     private Inventory inventory;
     private ColorfulProvider<?> holder;
@@ -31,23 +30,33 @@ public class Gui {
         inventory = Bukkit.createInventory(holder, rows * 9, TextUtil.colorize(title));
     }
 
-    public void show(Player player) {
+    public void fill() {
+        inventory.clear();
         drawMask();
+        for (Integer slot : slotItems.keySet()) {
+            GuiItem item = slotItems.get(slot);
+            inventory.setItem(slot, item.getItemStack());
+        }
+        for (GuiItem item : addItems) {
+            inventory.addItem(item.getItemStack());
+        }
+    }
+
+    public void show(Player player) {
+        fill();
         player.openInventory(getInventory());
     }
 
     public void setItem(int row, int col, GuiItem item) {
-        inventory.setItem(getSlotFromRowCol(row, col), item.getItemStack());
+        slotItems.put(getSlotFromRowCol(row, col), item);
     }
 
     public void setItem(int slot, GuiItem item) {
-        getItems().add(item);
-        inventory.setItem(slot, item.getItemStack());
+        getSlotItems().put(slot, item);
     }
 
     public void addItem(GuiItem item) {
-        getItems().add(item);
-        inventory.addItem(item.getItemStack());
+        getAddItems().add(item);
     }
 
     public int getSlotFromRowCol(final int row, final int col) {
@@ -56,18 +65,27 @@ public class Gui {
 
     public void addItem(GuiItem... item) {
         for (GuiItem guiItem : item) {
-            getItems().add(guiItem);
-            inventory.addItem(guiItem.getItemStack());
+            getAddItems().add(guiItem);
         }
     }
 
     public GuiItem getItem(UUID uuid) {
-        for (GuiItem guiItem : items) {
+        for (Integer id : slotItems.keySet()) {
+            GuiItem guiItem = slotItems.get(id);
+            if (guiItem.getUniqueId().equals(uuid)) {
+                return guiItem;
+            }
+        }
+        for (GuiItem guiItem : addItems) {
             if (guiItem.getUniqueId().equals(uuid)) {
                 return guiItem;
             }
         }
         return null;
+    }
+
+    public void addMask(String indicator, GuiItem item) {
+        getMask().addItem(indicator, item);
     }
 
     public void drawMask() {
@@ -100,12 +118,12 @@ public class Gui {
         this.mask = mask;
     }
 
-    public List<GuiItem> getItems() {
-        return items;
+    public Map<Integer, GuiItem> getSlotItems() {
+        return slotItems;
     }
 
-    public void setItems(List<GuiItem> items) {
-        this.items = items;
+    public LinkedList<GuiItem> getAddItems() {
+        return addItems;
     }
 
     public Inventory getInventory() {

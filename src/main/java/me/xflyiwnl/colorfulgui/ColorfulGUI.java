@@ -1,8 +1,9 @@
 package me.xflyiwnl.colorfulgui;
 
-import me.xflyiwnl.colorfulgui.builder.ItemBuilder;
 import me.xflyiwnl.colorfulgui.builder.inventory.DynamicGuiBuilder;
 import me.xflyiwnl.colorfulgui.builder.inventory.StaticGuiBuilder;
+import me.xflyiwnl.colorfulgui.builder.item.DynamicItemBuilder;
+import me.xflyiwnl.colorfulgui.builder.item.StaticItemBuilder;
 import me.xflyiwnl.colorfulgui.listener.GuiListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,8 +22,12 @@ public class ColorfulGUI {
         instance.getServer().getPluginManager().registerEvents(new GuiListener(), instance);
     }
 
-    public ItemBuilder item() {
-        return new ItemBuilder();
+    public StaticItemBuilder staticItem() {
+        return new StaticItemBuilder();
+    }
+
+    public DynamicItemBuilder dynamicItem() {
+        return new DynamicItemBuilder();
     }
 
     public StaticGuiBuilder gui() {

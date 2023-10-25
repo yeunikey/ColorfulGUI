@@ -1,5 +1,6 @@
 package me.xflyiwnl.colorfulgui.object;
 
+import me.xflyiwnl.colorfulgui.object.action.GuiAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 

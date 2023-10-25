@@ -1,4 +1,4 @@
-package me.xflyiwnl.colorfulgui.object;
+package me.xflyiwnl.colorfulgui.object.action;
 
 import org.bukkit.event.Event;
 
