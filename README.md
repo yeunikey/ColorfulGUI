@@ -41,4 +41,4 @@ now register the ColorfulGUI class.
 ColorfulGUI colorfulGUI = new ColorfulGUI(yourMainClass);
 ```
 
-then follow the documentation [here]()
+then follow the documentation [here](https://github.com/xflyiwnl/ColorfulGUI/wiki)
