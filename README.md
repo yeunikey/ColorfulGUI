@@ -32,7 +32,7 @@ Once all requirements have been met, you must add the dependency to Maven
 <dependency>
     <groupId>com.github.xflyiwnl</groupId>
     <artifactId>ColorfulGUI</artifactId>
-    <version>v2.0-release</version>
+    <version>2.0</version>
 </dependency>
 ```
 
