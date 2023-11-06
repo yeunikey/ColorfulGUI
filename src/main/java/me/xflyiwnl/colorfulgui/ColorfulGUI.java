@@ -7,7 +7,7 @@ import me.xflyiwnl.colorfulgui.builder.item.StaticItemBuilder;
 import me.xflyiwnl.colorfulgui.listener.GuiListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class ColorfulGUI {
+public class ColorfulGUI extends JavaPlugin {
 
     private static JavaPlugin instance;
 
@@ -17,6 +17,7 @@ public class ColorfulGUI {
         registerListeners();
 
     }
+
 
     private void registerListeners() {
         instance.getServer().getPluginManager().registerEvents(new GuiListener(), instance);

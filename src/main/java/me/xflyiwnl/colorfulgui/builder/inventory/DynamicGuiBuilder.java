@@ -1,5 +1,6 @@
 package me.xflyiwnl.colorfulgui.builder.inventory;
 
+import me.xflyiwnl.colorfulgui.builder.GuiBuilder;
 import me.xflyiwnl.colorfulgui.object.GuiMask;
 import me.xflyiwnl.colorfulgui.object.PaginatedGui;
 import me.xflyiwnl.colorfulgui.provider.ColorfulProvider;

@@ -12,7 +12,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.NotNull;
 
-public class ColorfulProvider<T extends Gui> implements InventoryHolder {
+public abstract class ColorfulProvider<T extends Gui> implements InventoryHolder {
 
     private Player player;
     private T gui;

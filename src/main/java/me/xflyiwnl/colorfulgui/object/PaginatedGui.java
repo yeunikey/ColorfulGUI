@@ -136,4 +136,16 @@ public class PaginatedGui extends Gui {
         player.openInventory(getInventory());
     }
 
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public HashMap<Integer, LinkedHashMap<Integer, GuiItem>> getPages() {
+        return pages;
+    }
+
+    public List<Integer> getAllowedZone() {
+        return allowedZone;
+    }
+
 }

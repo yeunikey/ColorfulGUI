@@ -141,4 +141,5 @@ public class Gui {
     public ColorfulProvider<?> getHolder() {
         return holder;
     }
+
 }
