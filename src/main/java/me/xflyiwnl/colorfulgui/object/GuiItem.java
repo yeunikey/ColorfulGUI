@@ -1,8 +1,12 @@
 package me.xflyiwnl.colorfulgui.object;
 
+import me.xflyiwnl.colorfulgui.ColorfulGUI;
 import me.xflyiwnl.colorfulgui.object.action.GuiAction;
+import org.bukkit.NamespacedKey;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.UUID;
 
@@ -40,6 +44,13 @@ public class GuiItem {
     }
 
     public void setItemStack(ItemStack itemStack) {
+        NamespacedKey key = new NamespacedKey(ColorfulGUI.getInstance(), "colorfulgui");
+        ItemMeta oldMeta = itemStack.getItemMeta();
+        if (oldMeta.getPersistentDataContainer().has(key, PersistentDataType.STRING)){
+            ItemMeta newMeta = itemStack.getItemMeta();
+            newMeta.getPersistentDataContainer().set(key, PersistentDataType.STRING, oldMeta.getPersistentDataContainer().get(key, PersistentDataType.STRING));
+            itemStack.setItemMeta(newMeta);
+        }
         this.itemStack = itemStack;
     }
 
