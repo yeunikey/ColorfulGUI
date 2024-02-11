@@ -44,6 +44,7 @@ public class StaticGuiBuilder implements GuiBuilder<Gui, StaticGuiBuilder> {
     @Override
     public Gui build() {
         Gui gui = new Gui(getHolder(), getTitle(), getRows(), getMask());
+        gui.setHolder(holder);
         getMask().setGui(gui);
         getHolder().setGui(gui);
         getHolder().init();

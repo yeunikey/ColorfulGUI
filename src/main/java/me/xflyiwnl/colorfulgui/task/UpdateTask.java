@@ -7,6 +7,7 @@ import me.xflyiwnl.colorfulgui.provider.ColorfulProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ public class UpdateTask extends BukkitRunnable {
     private JavaPlugin plugin;
     private int updateTime;
     private ColorfulProvider<?> provider;
+    private boolean started = false;
 
     public UpdateTask(JavaPlugin plugin, int updateTime, ColorfulProvider<?> provider) {
         this.plugin = plugin;
@@ -23,6 +25,8 @@ public class UpdateTask extends BukkitRunnable {
     }
 
     public void startTask() {
+        if (started) return;
+        started = true;
         this.runTaskTimer(plugin, 0, updateTime);
     }
 
@@ -30,26 +34,32 @@ public class UpdateTask extends BukkitRunnable {
     public void run() {
         provider.update();
 
-        Map<Integer, GuiItem> slotItems = provider.getGui().getSlotItems();
+        Map<Integer, GuiItem> slotItems = new HashMap<Integer, GuiItem>(provider.getGui().getSetItems());
         for (Integer id : slotItems.keySet()) {
             GuiItem item = slotItems.get(id);
             updateItem(item);
         }
-        LinkedList<GuiItem> addItems = provider.getGui().getAddItems();
+        LinkedList<GuiItem> addItems = new LinkedList<GuiItem>(provider.getGui().getAddItems());
         for (GuiItem item : addItems) {
             updateItem(item);
         }
-        provider.getGui().fill();
+        provider.getGui().render();
     }
 
     public void updateItem(GuiItem item) {
         if (item instanceof DynamicItem) {
             DynamicItem dynamicItem = (DynamicItem) item;
             if (dynamicItem.getOnUpdate() == null) return;
-            UpdateItemEvent event = new UpdateItemEvent(item.getItemStack());
+            UpdateItemEvent<DynamicItem> event = new UpdateItemEvent<DynamicItem>(dynamicItem);
             dynamicItem.getOnUpdate().execute(event);
-            item.setItemStack(event.getItem());
         }
     }
 
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
+    }
 }

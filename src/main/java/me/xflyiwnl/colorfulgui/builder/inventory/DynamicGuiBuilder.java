@@ -44,6 +44,7 @@ public class DynamicGuiBuilder implements GuiBuilder<PaginatedGui, DynamicGuiBui
     @Override
     public PaginatedGui build() {
         PaginatedGui gui = new PaginatedGui(getHolder(), getTitle(), getRows(), getMask());
+        gui.setHolder(holder);
         getMask().setGui(gui);
         getHolder().setGui(gui);
         getHolder().init();

@@ -3,9 +3,9 @@ package me.xflyiwnl.colorfulgui.builder.item;
 import me.xflyiwnl.colorfulgui.ColorfulGUI;
 import me.xflyiwnl.colorfulgui.builder.ItemBuilder;
 import me.xflyiwnl.colorfulgui.object.DynamicItem;
-import me.xflyiwnl.colorfulgui.object.action.GuiAction;
 import me.xflyiwnl.colorfulgui.object.action.MetaChange;
 import me.xflyiwnl.colorfulgui.object.action.UpdateItem;
+import me.xflyiwnl.colorfulgui.object.action.click.ClickDynamicAction;
 import me.xflyiwnl.colorfulgui.object.event.UpdateItemEvent;
 import me.xflyiwnl.colorfulgui.util.TextUtil;
 import org.bukkit.Color;
@@ -14,7 +14,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
@@ -28,6 +27,7 @@ import java.util.*;
 
 public class DynamicItemBuilder implements ItemBuilder<DynamicItem> {
 
+    private DynamicItem guiItem;
     private ItemStack itemStack;
     private ItemMeta itemMeta;
     private Material material;
@@ -47,8 +47,8 @@ public class DynamicItemBuilder implements ItemBuilder<DynamicItem> {
     private Player player;
 
     private Map<Enchantment, Integer> enchantments = new HashMap<Enchantment, Integer>();
-    private GuiAction<InventoryClickEvent> action;
-    private UpdateItem<UpdateItemEvent> onUpdate;
+    private ClickDynamicAction action;
+    private UpdateItem<UpdateItemEvent<DynamicItem>> onUpdate;
 
     private PotionData potionData;
     private Color color;
@@ -59,6 +59,11 @@ public class DynamicItemBuilder implements ItemBuilder<DynamicItem> {
     private MetaChange<ItemMeta> metaChange;
 
     public DynamicItemBuilder() {
+    }
+
+    public DynamicItemBuilder from(DynamicItem guiItem) {
+        this.guiItem = guiItem;
+        return this;
     }
 
     public DynamicItemBuilder from(ItemStack itemStack) {
@@ -106,7 +111,7 @@ public class DynamicItemBuilder implements ItemBuilder<DynamicItem> {
         return this;
     }
 
-    public DynamicItemBuilder action(GuiAction<InventoryClickEvent> action) {
+    public DynamicItemBuilder action(ClickDynamicAction action) {
         this.action = action;
         return this;
     }
@@ -117,7 +122,7 @@ public class DynamicItemBuilder implements ItemBuilder<DynamicItem> {
         return this;
     }
 
-    public DynamicItemBuilder update(UpdateItem<UpdateItemEvent> onUpdate) {
+    public DynamicItemBuilder update(UpdateItem<UpdateItemEvent<DynamicItem>> onUpdate) {
         this.onUpdate = onUpdate;
         return this;
     }
@@ -155,11 +160,17 @@ public class DynamicItemBuilder implements ItemBuilder<DynamicItem> {
 
         UUID uuid = UUID.randomUUID();
 
-        ItemStack itemStack = this.itemStack;
-        if (itemStack == null) {
+        ItemStack itemStack = guiItem != null ? guiItem.getItemStack() : this.itemStack;
+        if (guiItem != null && guiItem.getItemStack() == null && itemStack == null ||
+                guiItem == null && itemStack == null) {
             itemStack = new ItemStack(material, amount);
-        } else {
+        }
+
+        if (material != null) {
             itemStack.setType(material);
+        }
+
+        if (amount != 1) {
             itemStack.setAmount(amount);
         }
 
@@ -186,7 +197,11 @@ public class DynamicItemBuilder implements ItemBuilder<DynamicItem> {
             itemMeta.addItemFlags(itemFlags);
         }
 
-        itemMeta.getPersistentDataContainer().set(new NamespacedKey(ColorfulGUI.getInstance(), "colorfulgui"), PersistentDataType.STRING, uuid.toString());
+        if (guiItem != null) {
+            itemMeta.getPersistentDataContainer().set(new NamespacedKey(ColorfulGUI.getInstance(), "colorfulgui"), PersistentDataType.STRING, guiItem.getUniqueId().toString());
+        } else {
+            itemMeta.getPersistentDataContainer().set(new NamespacedKey(ColorfulGUI.getInstance(), "colorfulgui"), PersistentDataType.STRING, uuid.toString());
+        }
 
         if (metaChange != null) {
             metaChange.execute(itemMeta);
@@ -218,7 +233,16 @@ public class DynamicItemBuilder implements ItemBuilder<DynamicItem> {
             itemStack.setItemMeta(bannerMeta);
         }
 
+        if (guiItem != null) {
+            guiItem.setItemStack(itemStack);
+            if (action != null)
+                guiItem.setAction(action);
+            if (onUpdate != null)
+                guiItem.setOnUpdate(onUpdate);
+            return guiItem;
+        } else {
+            return new DynamicItem(uuid, itemStack, action, onUpdate);
+        }
 
-        return new DynamicItem(uuid, itemStack, action, onUpdate);
     }
 }

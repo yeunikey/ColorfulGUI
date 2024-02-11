@@ -1,17 +1,16 @@
 package me.xflyiwnl.colorfulgui.object.event;
 
-import org.bukkit.inventory.ItemStack;
+import me.xflyiwnl.colorfulgui.object.GuiItem;
 
-public class UpdateItemEvent {
+public class UpdateItemEvent<T extends GuiItem> {
 
+    private T item;
 
-    private ItemStack item;
-
-    public UpdateItemEvent(ItemStack item) {
+    public UpdateItemEvent(T item) {
         this.item = item;
     }
 
-    public ItemStack getItem() {
+    public T getItem() {
         return item;
     }
 
