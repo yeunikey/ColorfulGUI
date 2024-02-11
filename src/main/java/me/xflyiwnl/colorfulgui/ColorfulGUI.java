@@ -7,7 +7,7 @@ import me.xflyiwnl.colorfulgui.builder.item.StaticItemBuilder;
 import me.xflyiwnl.colorfulgui.listener.GuiListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class ColorfulGUI extends JavaPlugin {
+public class ColorfulGUI {
 
     private static JavaPlugin instance;
 
