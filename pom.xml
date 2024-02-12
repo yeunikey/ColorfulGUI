@@ -6,7 +6,7 @@
 
     <groupId>me.xflyiwnl</groupId>
     <artifactId>ColorfulGUI</artifactId>
-    <version>3.0</version>
+    <version>3.0-fixed</version>
     <packaging>jar</packaging>
 
     <name>ColorfulGUI</name>
@@ -71,10 +71,10 @@
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.jetbrains</groupId>-->
-<!--            <artifactId>annotations-java5</artifactId>-->
-<!--            <version>24.0.1</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>24.0.1</version>
+        </dependency>
     </dependencies>
 </project>
