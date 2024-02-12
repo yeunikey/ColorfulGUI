@@ -1,9 +1,9 @@
 package me.xflyiwnl.colorfulgui.object;
 
-import me.xflyiwnl.colorfulgui.ColorfulGUI;
 import me.xflyiwnl.colorfulgui.builder.ItemBuilder;
 import me.xflyiwnl.colorfulgui.object.action.ClickAction;
 import me.xflyiwnl.colorfulgui.object.event.ClickItemEvent;
+import me.xflyiwnl.colorfulgui.ColorfulGUI;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;

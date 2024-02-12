@@ -1,11 +1,11 @@
 package me.xflyiwnl.colorfulgui.builder.item;
 
+import me.xflyiwnl.colorfulgui.object.action.click.ClickDynamicAction;
 import me.xflyiwnl.colorfulgui.ColorfulGUI;
 import me.xflyiwnl.colorfulgui.builder.ItemBuilder;
 import me.xflyiwnl.colorfulgui.object.DynamicItem;
 import me.xflyiwnl.colorfulgui.object.action.MetaChange;
 import me.xflyiwnl.colorfulgui.object.action.UpdateItem;
-import me.xflyiwnl.colorfulgui.object.action.click.ClickDynamicAction;
 import me.xflyiwnl.colorfulgui.object.event.UpdateItemEvent;
 import me.xflyiwnl.colorfulgui.util.TextUtil;
 import org.bukkit.Color;

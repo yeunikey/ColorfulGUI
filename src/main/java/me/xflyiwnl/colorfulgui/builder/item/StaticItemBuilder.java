@@ -1,10 +1,10 @@
 package me.xflyiwnl.colorfulgui.builder.item;
 
-import me.xflyiwnl.colorfulgui.ColorfulGUI;
 import me.xflyiwnl.colorfulgui.builder.ItemBuilder;
+import me.xflyiwnl.colorfulgui.object.action.click.ClickStaticAction;
+import me.xflyiwnl.colorfulgui.ColorfulGUI;
 import me.xflyiwnl.colorfulgui.object.StaticItem;
 import me.xflyiwnl.colorfulgui.object.action.MetaChange;
-import me.xflyiwnl.colorfulgui.object.action.click.ClickStaticAction;
 import me.xflyiwnl.colorfulgui.util.TextUtil;
 import org.bukkit.Color;
 import org.bukkit.Material;

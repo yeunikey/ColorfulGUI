@@ -1,3 +1,0 @@
-name: ColorfulGUI
-version: '${project.version}'
-main: me.xflyiwnl.colorfulgui.ColorfulGUI

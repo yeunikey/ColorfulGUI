@@ -1,13 +1,13 @@
 package me.xflyiwnl.colorfulgui.listener;
 
+import me.xflyiwnl.colorfulgui.object.event.click.ClickDynamicItemEvent;
+import me.xflyiwnl.colorfulgui.object.event.click.ClickStaticItemEvent;
+import me.xflyiwnl.colorfulgui.provider.ColorfulProvider;
 import me.xflyiwnl.colorfulgui.ColorfulGUI;
 import me.xflyiwnl.colorfulgui.object.DynamicItem;
 import me.xflyiwnl.colorfulgui.object.Gui;
 import me.xflyiwnl.colorfulgui.object.GuiItem;
 import me.xflyiwnl.colorfulgui.object.StaticItem;
-import me.xflyiwnl.colorfulgui.object.event.click.ClickDynamicItemEvent;
-import me.xflyiwnl.colorfulgui.object.event.click.ClickStaticItemEvent;
-import me.xflyiwnl.colorfulgui.provider.ColorfulProvider;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

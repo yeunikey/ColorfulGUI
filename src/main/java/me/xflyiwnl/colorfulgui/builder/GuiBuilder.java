@@ -1,7 +1,7 @@
 package me.xflyiwnl.colorfulgui.builder;
 
-import me.xflyiwnl.colorfulgui.object.Gui;
 import me.xflyiwnl.colorfulgui.provider.ColorfulProvider;
+import me.xflyiwnl.colorfulgui.object.Gui;
 
 import java.util.List;
 

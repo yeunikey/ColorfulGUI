@@ -11,8 +11,10 @@ public class ColorfulGUI {
 
     private static JavaPlugin instance;
 
-    public ColorfulGUI() {
-        System.out.println("TEST");
+    public ColorfulGUI(JavaPlugin plugin) {
+        instance = plugin;
+
+        registerListeners();
     }
 
     private void registerListeners() {
